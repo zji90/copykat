@@ -266,7 +266,6 @@ start_time <- Sys.time()
 #library(parallelDist)
 
   if(distance=="euclidean"){
-  jpeg(paste(sample.name,"heatmap.jpeg",sep=""), height=h*250, width=4000, res=100)
    heatmap.3(t(mat.adj),dendrogram="r", distfun = function(x) parallelDist::parDist(x,threads =n.cores, method = distance), hclustfun = function(x) hclust(x, method="ward.D"),
             ColSideColors=chr1,Colv=NA, Rowv=TRUE,
             notecol="black",col=my_palette,breaks=col_breaks, key=TRUE,
@@ -274,9 +273,7 @@ start_time <- Sys.time()
             cexRow=0.1,cexCol=0.1,cex.main=1,cex.lab=0.1,
             symm=F,symkey=F,symbreaks=T,cex=1, main=paste(WNS1,"; ",WNS, sep=""), cex.main=4, margins=c(10,10))
 
-  dev.off()
   } else {
-    jpeg(paste(sample.name,"heatmap.jpeg",sep=""), height=h*250, width=4000, res=100)
     heatmap.3(t(mat.adj),dendrogram="r", distfun = function(x) as.dist(1-cor(t(x), method = distance)), hclustfun = function(x) hclust(x, method="ward.D"),
                  ColSideColors=chr1,Colv=NA, Rowv=TRUE,
               notecol="black",col=my_palette,breaks=col_breaks, key=TRUE,
@@ -284,7 +281,6 @@ start_time <- Sys.time()
               cexRow=0.1,cexCol=0.1,cex.main=1,cex.lab=0.1,
               symm=F,symkey=F,symbreaks=T,cex=1, main=paste(WNS1,"; ",WNS, sep=""), cex.main=4, margins=c(10,10))
 
-    dev.off()
   }
   end_time<- Sys.time()
   print(end_time -start_time)
@@ -401,7 +397,6 @@ start_time <- Sys.time()
   col_breaks = c(seq(-1,-0.4,length=50),seq(-0.4,-0.2,length=150),seq(-0.2,0.2,length=600),seq(0.2,0.4,length=150),seq(0.4, 1,length=50))
 
   if(distance=="euclidean"){
-  jpeg(paste(sample.name,"heatmap.jpeg",sep=""), height=h*250, width=4000, res=100)
    heatmap.3(t(mat.adj),dendrogram="r", distfun = function(x) parallelDist::parDist(x,threads =n.cores, method = distance), hclustfun = function(x) hclust(x, method="ward.D"),
             ColSideColors=chr1,RowSideColors=cells,Colv=NA, Rowv=TRUE,
             notecol="black",col=my_palette,breaks=col_breaks, key=TRUE,
@@ -410,9 +405,7 @@ start_time <- Sys.time()
             symm=F,symkey=F,symbreaks=T,cex=1, main=paste(WNS1,"; ",WNS, sep=""), cex.main=4, margins=c(10,10))
 
   legend("topright", paste("pred.",names(table(com.preN)),sep=""), pch=15,col=RColorBrewer::brewer.pal(n = 8, name = "Dark2")[2:1], cex=1)
-  dev.off()
   } else {
-    jpeg(paste(sample.name,"heatmap.jpeg",sep=""), height=h*250, width=4000, res=100)
     heatmap.3(t(mat.adj),dendrogram="r", distfun = function(x) as.dist(1-cor(t(x), method = distance)), hclustfun = function(x) hclust(x, method="ward.D"),
                  ColSideColors=chr1,RowSideColors=cells,Colv=NA, Rowv=TRUE,
               notecol="black",col=my_palette,breaks=col_breaks, key=TRUE,
@@ -421,8 +414,6 @@ start_time <- Sys.time()
               symm=F,symkey=F,symbreaks=T,cex=1, main=paste(WNS1,"; ",WNS, sep=""), cex.main=4, margins=c(10,10))
 
     legend("topright", paste("pred.",names(table(com.preN)),sep=""), pch=15,col=RColorBrewer::brewer.pal(n = 8, name = "Dark2")[2:1], cex=1)
-
-    dev.off()
   }
 
  if(output.seg=="TRUE"){
